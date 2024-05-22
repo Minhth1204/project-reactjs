@@ -1,7 +1,7 @@
 
 import '../src/';
 import Header from './Components/Header/Header.js';
-import { Link, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
 
 const App = () => {
