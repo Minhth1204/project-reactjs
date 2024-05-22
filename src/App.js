@@ -1,11 +1,24 @@
 
-import './App.scss';
+import '../src/';
+import Header from './Components/Header/Header.js';
+import { Link, Outlet } from 'react-router-dom';
+
 
 const App = () => {
   return (
     <div className='app-container'>
-      heloo
-      <button>text</button>
+      <div className='header-container'>
+        <Header />
+      </div>
+      <div className='main-container'>
+        <div className='sidenav-container'>
+
+        </div>
+        <div className='app-content'>
+          <Outlet />
+        </div>
+      </div>
+
     </div>
   );
 
