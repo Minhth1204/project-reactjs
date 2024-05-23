@@ -8,11 +8,9 @@ import {
     SidebarFooter,
     SidebarContent,
 } from 'react-pro-sidebar';
-
 import { FaTachometerAlt, FaGem, FaList, FaGithub, FaRegLaughWink, FaHeart } from 'react-icons/fa';
 import sidebarBg from '../../assets/bg2.jpg';
-
-
+import { Link } from 'react-router-dom'
 import { DiReact } from "react-icons/di";
 import { MdDashboard } from "react-icons/md";
 
@@ -45,6 +43,7 @@ const SideBar = (props) => {
                     >
                         <DiReact size={'3em'} color={"00bfff"} />
                         <span >Manager</span>
+                        <Link to='/home' />
                     </div>
                 </SidebarHeader>
 
@@ -54,6 +53,7 @@ const SideBar = (props) => {
                             icon={<MdDashboard />}
                         >
                             Dashboard
+                            <Link to='/admins' />
                         </MenuItem>
                     </Menu>
                     <Menu iconShape="circle">
@@ -62,8 +62,9 @@ const SideBar = (props) => {
                             title="Features"
                         >
                             <MenuItem> Quản lý Users</MenuItem>
-                            <MenuItem > Quản lý Bài Quiz</MenuItem>
-                            <MenuItem> Quản lý Câu Hỏi</MenuItem>
+                            <Link to='/admins/manage-users' />
+                            {/* <MenuItem > Quản lý Bài Quiz</MenuItem>
+                            <MenuItem> Quản lý Câu Hỏi</MenuItem> */}
                         </SubMenu>
 
                     </Menu>
@@ -77,13 +78,13 @@ const SideBar = (props) => {
                         }}
                     >
                         <a
-                            href="https://haryphamdev.github.io/hoidanit-udemy/"
+                            href="https://github.com/Minhth1204/project-reactjs"
                             target="_blank"
                             className="sidebar-btn"
                             rel="noopener noreferrer"
                         >
                             <span style={{ whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
-                                &#169; Hỏi Dân IT Udemy
+                                &#169; tran hong minh
                             </span>
                         </a>
                     </div>
