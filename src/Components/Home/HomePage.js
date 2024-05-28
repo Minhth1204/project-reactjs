@@ -2,7 +2,7 @@ import VideoHomePage from '../../assets/video-HomePage.webm'
 const HomePage = (props) => {
     return (
         <div className="homepage-container">
-            <video width="550" height="500" autoPlay muted loop>
+            <video className='vidio' width="550" height="500" autoPlay muted loop>
                 <source src={VideoHomePage} type='video/webm' />
             </video>
             <div className='homepage-content'>

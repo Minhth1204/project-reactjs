@@ -54,51 +54,105 @@ body {
             }
         }
     }
+}
 
-    .homepage-container {
-        .homepage-content {
-            padding: 50px;
+.homepage-container {
+    width: 100%;
+    /* Đặt chiều rộng 100% cho phần tử container */
+    height: auto;
+    /* Đặt chiều cao tự động */
 
-            position: relative;
-            width: 40%;
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
-        }
+    .homepage-content {
+        padding: 50px;
+        position: fixed;
+        /* Đặt vị trí cố định cho nội dung */
+        bottom: 0;
+        /* Đặt nội dung sát đáy của trang */
+        right: 0;
+        /* Đặt nội dung sát cạnh phải của trang */
+        width: 40%;
+        /* Đặt chiều rộng của nội dung */
+        display: flex;
+        /* Sử dụng flexbox để bố trí nội dung */
+        flex-direction: column;
+        /* Bố trí nội dung theo chiều dọc */
+        gap: 40px;
+        /* Khoảng cách giữa các phần tử con */
 
         .title-1 {
             font-size: 60px;
+            /* Đặt kích thước font */
             font-weight: 600;
+            /* Đặt độ dày của font */
         }
 
         .title-2 {
             font-size: 25px;
+            /* Đặt kích thước font */
         }
 
         .title-3 {
             button {
                 border-radius: 5px;
+                /* Bo góc cho nút */
                 height: 40px;
+                /* Đặt chiều cao cho nút */
                 padding: 0 15px;
+                /* Đặt khoảng cách padding cho nút */
                 background: #303030;
+                /* Đặt màu nền cho nút */
                 color: white;
-                height: 40px;
+                /* Đặt màu chữ cho nút */
                 border: none;
+                /* Bỏ viền của nút */
 
                 &:hover {
                     background: black;
+                    /* Đổi màu nền khi hover */
                 }
             }
         }
     }
+
+    video {
+        mask-image: -webkit-radial-gradient(center, white, black);
+        /* Áp dụng gradient mặt nạ cho video */
+        position: fixed;
+        /* Đặt video ở vị trí cố định */
+        bottom: 0;
+        /* Đặt video sát đáy của trang */
+        left: 0;
+        /* Đặt video sát cạnh trái của trang */
+        width: 60%;
+        /* Đặt chiều rộng của video */
+        height: auto;
+        /* Đặt chiều cao tự động để duy trì tỉ lệ */
+        object-fit: contain;
+        /* Video sẽ giữ nguyên tỉ lệ và vừa khung chứa */
+        overflow-clip-margin: content-box;
+        /* Đặt lề cho phần nội dung bị tràn */
+        overflow: clip;
+        /* Ẩn nội dung tràn ra ngoài khung chứa */
+    }
 }
 
-video {
-    position: fixed;
-    bottom: 0;
-    width: 850px;
-    height: 850px;
-    right: 0;
+/* Media query để thay đổi bố cục khi màn hình nhỏ */
+@media (max-width: 768px) {
+    .homepage-container {
+        .homepage-content {
+            position: static;
+            /* Đặt vị trí tĩnh cho nội dung */
+            width: 100%;
+            /* Đặt chiều rộng 100% */
+        }
 
-
+        video {
+            position: static;
+            /* Đặt vị trí tĩnh cho video */
+            width: 100%;
+            /* Đặt chiều rộng 100% */
+            margin-top: 20px;
+            /* Thêm khoảng cách phía trên video */
+        }
+    }
 }
