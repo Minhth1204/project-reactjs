@@ -9,7 +9,7 @@ import {
     SidebarContent,
 } from 'react-pro-sidebar';
 import { FaTachometerAlt, FaGem, FaList, FaGithub, FaRegLaughWink, FaHeart } from 'react-icons/fa';
-import sidebarBg from '../../assets/bg2.jpg';
+import sidebarBg from '../../assets/bgsidebar.jpg';
 import { Link } from 'react-router-dom'
 import { DiReact } from "react-icons/di";
 import { MdDashboard } from "react-icons/md";
@@ -78,7 +78,7 @@ const SideBar = (props) => {
                         }}
                     >
                         <a
-                            href="https://github.com/Minhth1204/project-reactjs"
+                            href="http://localhost:3000/"
                             target="_blank"
                             className="sidebar-btn"
                             rel="noopener noreferrer"

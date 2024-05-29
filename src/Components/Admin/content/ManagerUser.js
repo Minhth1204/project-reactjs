@@ -1,23 +1,31 @@
 import ModalCreateUser from "./ModalCreateUser";
 import './ManagerUser.scss'
+import { useState } from "react";
+
 
 const ManagerUser = () => {
+
+    const [showModalCreateUser, setShowModalCreateUser] = useState(false);
+
     return (
-        <div classNameName="manga-user-container">
-            <div classNameName="title">
+        <div className="manager-user-container">
+            <div className="title"  >
                 Manager User
             </div>
-            <div classNameName="users-content">
-                <div>
-                    <button>Add new users</button>
+            <div className="users-content">
+                <div className="btn-add-new">
+                    <button className="btn btn-primary" onClick={() => setShowModalCreateUser(true)}> Add new users</button>
                 </div>
-                <div>
+                <div className="table-users-container">
                     table user
 
                 </div>
-                <ModalCreateUser />
+                <ModalCreateUser
+                    show={showModalCreateUser}
+                    setShow={setShowModalCreateUser}
+                />
             </div>
-        </div>
+        </div >
     )
 }
 export default ManagerUser;
