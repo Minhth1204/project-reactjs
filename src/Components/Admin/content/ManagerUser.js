@@ -1,6 +1,7 @@
 import ModalCreateUser from "./ModalCreateUser";
 import './ManagerUser.scss'
 import { useState } from "react";
+import TableUser from "./tableUser";
 
 
 const ManagerUser = () => {
@@ -17,7 +18,7 @@ const ManagerUser = () => {
                     <button className="btn btn-primary" onClick={() => setShowModalCreateUser(true)}> Add new users</button>
                 </div>
                 <div className="table-users-container">
-                    table user
+                    <TableUser />
 
                 </div>
                 <ModalCreateUser
