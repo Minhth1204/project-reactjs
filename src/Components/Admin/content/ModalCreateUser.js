@@ -2,8 +2,8 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { FcPlus } from "react-icons/fc";
-import axios from 'axios';
 import { toast } from 'react-toastify'
+import { postCreateNewUser } from '../../../services/apiServices';
 const ModalCreateUser = (props) => {
     const { show, setShow } = props
     const handleClose = () => {
@@ -55,13 +55,8 @@ const ModalCreateUser = (props) => {
 
 
         // Tạo đối tượng FormData
-        const form = new FormData();
-        form.append('email', email);
-        form.append('password', Password);
-        form.append('username', username);
-        form.append('role', role);
-        form.append('Image', img);
-        let res = await axios.post('http://localhost:8081/api/v1/participant', form)
+
+        let res = await postCreateNewUser(email, Password, username, role, img);
         if (res.data && res.data.EC === 0) {
             toast.success(res.data.EM);
             handleClose();
