@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { FcPlus } from "react-icons/fc";
 import axios from 'axios';
+import { toast } from 'react-toastify'
 const ModalCreateUser = (props) => {
     const { show, setShow } = props
     const handleClose = () => {
@@ -32,8 +33,26 @@ const ModalCreateUser = (props) => {
 
     }
 
+    const validateEmail = (email) => {
+        return String(email)
+            .toLowerCase()
+            .match(
+                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            );
+    };
+
     const handleSubmitCreateUser = async () => {
         //validate: làm sau 
+        const isValidEmail = validateEmail(email);
+        if (!isValidEmail) {
+            toast.error('IsValid email')
+            return;
+        }
+        if (!Password) {
+            toast.error('IsValid Password')
+        }
+
+
 
         // Tạo đối tượng FormData
         const form = new FormData();
@@ -41,17 +60,14 @@ const ModalCreateUser = (props) => {
         form.append('password', Password);
         form.append('username', username);
         form.append('role', role);
-        form.append('UserImage', img);
-
-        try {
-            let res = await axios.post('http://localhost:8081/api/v1/participant', form, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            });
-            console.log('>>>>check res', res);
-        } catch (error) {
-            console.error('Error while creating user:', error);
+        form.append('Image', img);
+        let res = await axios.post('http://localhost:8081/api/v1/participant', form)
+        if (res.data && res.data.EC === 0) {
+            toast.success(res.data.EM);
+            handleClose();
+        }
+        if (res.data && res.data.EC !== 0) {
+            toast.error(res.data.EC)
         }
     }
     return (
