@@ -3,13 +3,14 @@ import './ManagerUser.scss'
 import TableUser from "./tableUser";
 import React, { useEffect, useState } from "react";
 import { getAllUsers } from "../../../services/apiServices";
+import ModalUpdateUser from "./ModalUpdateUser";
 
 const ManagerUser = () => {
 
     const [showModalCreateUser, setShowModalCreateUser] = useState(false);
-
+    const [showModalUpdateUser, setShowModalUpdateUser] = useState(false)
     const [listUsers, setListUsers] = useState([]);
-
+    const [dataUpdate, setDataUpdate] = useState({})
     useEffect(() => {
         fetchListUsers();
     }, []);
@@ -27,6 +28,12 @@ const ManagerUser = () => {
             console.error("Error fetching users:", error); // Log lỗi nếu có
         }
     };
+    const handleClickBtnUpdate = (user) => {
+        setShowModalUpdateUser(true)
+        setDataUpdate(user)
+
+    }
+
 
     return (
         <div className="manager-user-container">
@@ -40,6 +47,7 @@ const ManagerUser = () => {
                 <div className="table-users-container">
                     <TableUser
                         listUsers={listUsers}
+                        handleClickBtnUpdate={handleClickBtnUpdate}
                     />
 
                 </div>
@@ -47,6 +55,11 @@ const ManagerUser = () => {
                     show={showModalCreateUser}
                     setShow={setShowModalCreateUser}
                     fetchListUsers={fetchListUsers}
+                />
+                <ModalUpdateUser
+                    show={showModalUpdateUser}
+                    setShow={setShowModalUpdateUser}
+                    dataUpdate={dataUpdate}
                 />
             </div>
         </div >
