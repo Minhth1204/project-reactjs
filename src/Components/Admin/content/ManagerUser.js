@@ -4,12 +4,17 @@ import TableUser from "./tableUser";
 import React, { useEffect, useState } from "react";
 import { getAllUsers } from "../../../services/apiServices";
 import ModalUpdateUser from "./ModalUpdateUser";
+import ModalViewUser from "./ModalViewUser";
+import ModalDeleteUser from "./ModalDelateUser";
 
 const ManagerUser = () => {
 
     const [showModalCreateUser, setShowModalCreateUser] = useState(false);
     const [showModalUpdateUser, setShowModalUpdateUser] = useState(false)
+    const [showModalViewUser, setShowModalViewUser] = useState(false)
     const [listUsers, setListUsers] = useState([]);
+    const [showModalDeleteUser, setShowModalDeleteUser] = useState(false)
+    const [dataDelete, setDataDelete] = useState({})
     const [dataUpdate, setDataUpdate] = useState({})
     useEffect(() => {
         fetchListUsers();
@@ -18,7 +23,7 @@ const ManagerUser = () => {
     const fetchListUsers = async () => {
         try {
             let res = await getAllUsers();
-            console.log("Response from getAllUsers:", res); // Log dữ liệu trả về từ API
+
             if (res.data.EC === 0) {
                 setListUsers(res.data.DT);
             } else {
@@ -32,6 +37,19 @@ const ManagerUser = () => {
         setShowModalUpdateUser(true)
         setDataUpdate(user)
 
+    }
+    const resetUpdateData = () => {
+        setDataUpdate({})
+
+    }
+    const handleClickViewUser = (user) => {
+        setShowModalViewUser(true)
+        setDataUpdate(user)
+    }
+    const handleClickBtnDelete = (user) => {
+        console.log(user)
+        setShowModalDeleteUser(true)
+        setDataDelete(user)
     }
 
 
@@ -48,6 +66,8 @@ const ManagerUser = () => {
                     <TableUser
                         listUsers={listUsers}
                         handleClickBtnUpdate={handleClickBtnUpdate}
+                        handleClickViewUser={handleClickViewUser}
+                        handleClickBtnDelete={handleClickBtnDelete}
                     />
 
                 </div>
@@ -60,6 +80,20 @@ const ManagerUser = () => {
                     show={showModalUpdateUser}
                     setShow={setShowModalUpdateUser}
                     dataUpdate={dataUpdate}
+                    fetchListUsers={fetchListUsers}
+                    resetUpdateData={resetUpdateData}
+                />
+                <ModalViewUser
+                    show={showModalViewUser}
+                    setShow={setShowModalViewUser}
+                    resetUpdateData={resetUpdateData}
+                    fetchListUsers={fetchListUsers}
+                    dataUpdate={dataUpdate}
+                />
+                <ModalDeleteUser
+                    show={showModalDeleteUser}
+                    setShow={setShowModalDeleteUser}
+                    dataDelete={dataDelete}
                 />
             </div>
         </div >
