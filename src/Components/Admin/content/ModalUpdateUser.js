@@ -141,7 +141,7 @@ const ModalUpdateUser = (props) => {
 
                         <div className="col-md-12">
                             <label className="form-label label-upload" htmlFor="labelUpload">
-                                <FcPlus /> Upload File Image
+                                <FcPlus /> Edit File Image
                             </label>
                             <input
                                 type="file"

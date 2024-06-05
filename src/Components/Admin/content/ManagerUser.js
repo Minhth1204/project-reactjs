@@ -6,9 +6,14 @@ import { getAllUsers } from "../../../services/apiServices";
 import ModalUpdateUser from "./ModalUpdateUser";
 import ModalViewUser from "./ModalViewUser";
 import ModalDeleteUser from "./ModalDelateUser";
+import TableUserPaginate from "./TableUserPaginate";
+import { getUserWithPaginate } from "../../../services/apiServices";
+
 
 const ManagerUser = () => {
 
+    const [pageCount, setPageCount] = useState(0);
+    const LIMIT = 7;
     const [showModalCreateUser, setShowModalCreateUser] = useState(false);
     const [showModalUpdateUser, setShowModalUpdateUser] = useState(false)
     const [showModalViewUser, setShowModalViewUser] = useState(false)
@@ -17,7 +22,8 @@ const ManagerUser = () => {
     const [dataDelete, setDataDelete] = useState({})
     const [dataUpdate, setDataUpdate] = useState({})
     useEffect(() => {
-        fetchListUsers();
+        // fetchListUsers();
+        fetchListUsersWithPaginate(1);
     }, []);
 
     const fetchListUsers = async () => {
@@ -25,6 +31,7 @@ const ManagerUser = () => {
             let res = await getAllUsers();
 
             if (res.data.EC === 0) {
+
                 setListUsers(res.data.DT);
             } else {
                 console.error("Error fetching users:", res.data.EM); // Log lỗi nếu có
@@ -33,6 +40,23 @@ const ManagerUser = () => {
             console.error("Error fetching users:", error); // Log lỗi nếu có
         }
     };
+
+    const fetchListUsersWithPaginate = async (page) => {
+        try {
+            let res = await getUserWithPaginate(page, LIMIT);
+
+            if (res.data.EC === 0) {
+                console.log('check fet', res.data.DT.users)
+                setListUsers(res.data.DT.users);
+                setPageCount(res.data.DT.totalPages)
+            } else {
+                console.error("Error fetching users:", res.data.EM); // Log lỗi nếu có
+            }
+        } catch (error) {
+            console.error("Error fetching users:", error); // Log lỗi nếu có
+        }
+    };
+
     const handleClickBtnUpdate = (user) => {
         setShowModalUpdateUser(true)
         setDataUpdate(user)
@@ -63,11 +87,19 @@ const ManagerUser = () => {
                     <button className="btn btn-primary" onClick={() => setShowModalCreateUser(true)}> Add new users</button>
                 </div>
                 <div className="table-users-container">
-                    <TableUser
+                    {/* <TableUser
                         listUsers={listUsers}
                         handleClickBtnUpdate={handleClickBtnUpdate}
                         handleClickViewUser={handleClickViewUser}
                         handleClickBtnDelete={handleClickBtnDelete}
+                    /> */}
+                    <TableUserPaginate
+                        listUsers={listUsers}
+                        handleClickBtnUpdate={handleClickBtnUpdate}
+                        handleClickViewUser={handleClickViewUser}
+                        handleClickBtnDelete={handleClickBtnDelete}
+                        fetchListUsersWithPaginate={fetchListUsersWithPaginate}
+                        pageCount={pageCount}
                     />
 
                 </div>
@@ -94,6 +126,7 @@ const ManagerUser = () => {
                     show={showModalDeleteUser}
                     setShow={setShowModalDeleteUser}
                     dataDelete={dataDelete}
+                    fetchListUsers={fetchListUsers}
                 />
             </div>
         </div >

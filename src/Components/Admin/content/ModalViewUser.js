@@ -2,10 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { FcPlus } from "react-icons/fc";
-
-import { toast } from "react-toastify";
-import { putUpdateUser } from "../../../services/apiServices";
+import { FcEditImage } from "react-icons/fc";
 import _ from 'lodash'
 const ModalViewUser = (props) => {
     const { show, setShow, dataUpdate } = props;
@@ -113,7 +110,7 @@ const ModalViewUser = (props) => {
 
                         <div className="col-md-12">
                             <label className="form-label label-upload" htmlFor="labelUpload" disabled>
-                                <FcPlus /> Upload File Image
+                                <FcEditImage /> view image
                             </label>
                             <input
                                 type="file"
